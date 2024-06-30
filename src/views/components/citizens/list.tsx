@@ -3,15 +3,17 @@ import { useEffect, useState } from 'react'
 import { Button } from '../ui/button'
 import SpinnerSVG from '@/assets/svg/loading-01.svg'
 import EmptySVG from '@/assets/svg/empty-box-01.svg'
+import RefreshSVG from '@/assets/svg/refresh-ccw-01.svg'
 import { Skeleton } from '@/views/components/ui/skeleton'
 
 import {
     Table,
-    TableBody, TableCell,
+    TableBody,
+    TableCell,
     TableFooter,
     TableHead,
     TableHeader,
-    TableRow
+    TableRow,
 } from '@/views/components/ui/table'
 import { AddCitizen } from './add'
 import { Note } from './note'
@@ -28,36 +30,34 @@ export function List() {
 
     const [currentPage, setCurrentPage] = useState(1)
     useEffect(() => {
-        if (!walletCtx.connected) ctz.action.resetCitizens() 
-            else delayed()
+        if (!walletCtx.connected) ctz.action.resetCitizens()
+        else delayed()
     }, [walletCtx.connected])
 
-
-    const delayed = async ()=>{
+    const delayed = async () => {
         await waits(1000)
         ctz.action.init()
-    }    
+    }
 
-    walletCtx.provider?.on('chainChanged',()=>{
+    walletCtx.provider?.on('chainChanged', () => {
         delayed()
     })
 
     return (
         <div>
-            <div className="mb-8 flex justify-end">
-                <div className="flex gap-8">
-                    <AddCitizen ctz={ctz} walletCtx={walletCtx} />
-                    {ctz.state.isLoading ? (
-                        <Button disabled>
-                            Refresh
-                            <SpinnerSVG className="ms-2 animate-spin text-2xl" />
-                        </Button>
-                    ) : (
-                        <Button onClick={() => ctz.action.init()}>
-                            Refresh
-                        </Button>
-                    )}
-                </div>
+            <div className="mb-8 flex justify-between gap-8 lg:justify-end">
+                <AddCitizen ctz={ctz} walletCtx={walletCtx} />
+                {ctz.state.isLoading ? (
+                    <Button title="Refresh" disabled>
+                        Refresh
+                        <SpinnerSVG className="ms-2 animate-spin text-xl" />
+                    </Button>
+                ) : (
+                    <Button title="Refresh" onClick={() => ctz.action.init()}>
+                        Refresh
+                        <RefreshSVG className="ms-2 text-xl" />
+                    </Button>
+                )}
             </div>
 
             <div className="p-0 lg:p-8">
@@ -122,7 +122,7 @@ export function List() {
                                         ))}
                                 </TableBody>
                                 <TableFooter className="w-full">
-                                    <TableRow>
+                                    <TableRow className='bg-white'>
                                         <TableCell colSpan={5}>
                                             <ListPagination
                                                 pageSize={pageSize}

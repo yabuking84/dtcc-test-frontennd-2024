@@ -5,9 +5,9 @@ import {
 export function Navigation() {
     return (
         <nav className="container px-8 py-6">
-            <div className="flex justify-between">
+            <div className="flex flex-col lg:flex-row justify-between">
                 <h1 className="mb-4 text-4xl font-bold">Citizens</h1>
-                <ol className="flex items-center justify-end gap-8">
+                <ol className="flex items-center justify-start lg:justify-end gap-8">
                     <li>
                         <ConnectWalletUI />
                     </li>
