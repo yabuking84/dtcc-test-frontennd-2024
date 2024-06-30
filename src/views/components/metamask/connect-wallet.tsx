@@ -6,27 +6,25 @@ import { useWalletContext } from '@/providers/metamask/wallet'
 import { MetaMaskButton } from '@metamask/sdk-react-ui'
 
 export function ConnectWallet() {
-    const walletCtx = useWalletContext()
+    const wCtx = useWalletContext()
 
     const connect = async () => {
-        await walletCtx.connectToMetaMask()
+        await wCtx.connectToMetaMask()
     }
 
     return (
         <div>
-            {/* walletCtx.connecting: {walletCtx.connecting?.toString()} <br />
-            walletCtx.connected: {walletCtx.connected?.toString()}<br /><br /><br /> */}
-            {walletCtx.connecting ? (
+            {wCtx.connecting ? (
                 <Button disabled>
                     <MetamaskSVG className="me-2 text-2xl" />
                     <SpinnerSVG className="ms-2 animate-spin text-2xl" />
                 </Button>
-            ) : walletCtx.provider?.isConnected() && walletCtx.account ? (
-                <Button onClick={() => walletCtx.sdk?.disconnect()}>
+            ) : wCtx.provider?.isConnected() && wCtx.account ? (
+                <Button onClick={() => wCtx.sdk?.disconnect()}>
                     <MetamaskSVG className="me-2 text-2xl" />
-                    {walletCtx.account?.slice(0, 5) +
+                    {wCtx.account?.slice(0, 5) +
                         '...' +
-                        walletCtx.account?.slice(-5)}
+                        wCtx.account?.slice(-5)}
                 </Button>
             ) : (
                 <Button onClick={connect}>
