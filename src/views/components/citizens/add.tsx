@@ -11,6 +11,7 @@ import { Input } from '@/views/components/ui/input'
 import { Label } from '@/views/components/ui/label'
 import { useEffect, useState } from 'react'
 import SpinnerSVG from '@/assets/svg/loading-01.svg'
+import PlusSVG from '@/assets/svg/plus-circle.svg'
 import { useCitizen } from '@/hooks/useCitizen'
 import { z } from 'zod'
 import { FlattenedCitizenFormErrors } from '@/schems/citizen'
@@ -69,7 +70,6 @@ export function AddCitizen({
         } catch (error) {
             if (error instanceof z.ZodError) {
                 const formatted: FlattenedCitizenFormErrors = error.flatten()
-                console.log(formatted)
                 setErrors({
                     name: formatted.fieldErrors.name?.[0] || '',
                     age: formatted.fieldErrors.age?.[0] || '',
@@ -87,7 +87,10 @@ export function AddCitizen({
             ) : (
                 <Dialog open={open} onOpenChange={setOpen}>
                     <DialogTrigger asChild>
-                        <Button variant="outline">Add Citizen</Button>
+                        <Button title='Add Citizen' className='border' variant="outline">
+                            Add Citizen
+                            <PlusSVG className="ms-2 text-xl" />
+                        </Button>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-[500px]">
                         <DialogHeader>
