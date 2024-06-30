@@ -12,9 +12,9 @@ const projPath = path.resolve(__dirname)
 export default defineConfig({
     plugins: [
         react(),
-        // million.vite({
-        //     auto: true,
-        // }),
+        million.vite({
+            auto: true,
+        }),
         svgr({
             svgrOptions: {
                 svgProps: {
@@ -24,49 +24,6 @@ export default defineConfig({
                 },
             },
             include: '**/*.svg',
-        }),
-        createHtmlPlugin({
-            inject: {
-                tags: [
-                    {
-                        injectTo: 'head',
-                        tag: 'link',
-                        attrs: {
-                            rel: 'preload',
-                            as: 'font',
-                            type: 'font/woff2',
-                            href: '/assets/fonts/poppins/files/poppins-latin-400-normal.woff2',
-                        },
-                    },
-                    {
-                        injectTo: 'head',
-                        tag: 'link',
-                        attrs: {
-                            rel: 'preload',
-                            as: 'style',
-                            href: '/assets/fonts/poppins.css',
-                            onload: "this.onload=null;this.rel='stylesheet'",
-                        },
-                    },
-                    // {
-                    //     injectTo: 'head',
-                    //     tag: 'link',
-                    //     attrs: {
-                    //         rel:'stylesheet',
-                    //         href: '/assets/fonts/poppins.css',
-                    //         crossOrigin:''
-                    //     },
-                    // },
-                ],
-            },
-        }),
-        viteStaticCopy({
-            targets: [
-                {
-                    src: 'node_modules/@fontsource/poppins/files',
-                    dest: 'assets/fonts/poppins',
-                },
-            ],
         }),
     ],
     resolve: {
