@@ -1,7 +1,6 @@
 import type { useCitizen } from '@/hooks/useCitizen'
 
 import SpinnerSVG from '@/assets/svg/loading-01.svg'
-import ShowSVG from '@/assets/svg/search-lg.svg'
 import { useEffect, useState } from 'react'
 
 export function Note({
