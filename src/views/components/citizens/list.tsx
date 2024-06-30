@@ -18,6 +18,7 @@ import { Note } from './note'
 import { useWalletContext } from '@/providers/metamask/wallet'
 import { ListPagination } from './pagination'
 import { FadeIn } from '@/views/transitions/fadein'
+import { waits } from '@/lib/utils'
 
 const pageSize = 5
 
@@ -27,16 +28,23 @@ export function List() {
 
     const [currentPage, setCurrentPage] = useState(1)
 
-    useEffect(() => {
-        if (walletCtx.connected && walletCtx.account) {
-            ctz.action.init()
-        } else ctz.action.resetCitizens()
-    }, [])
+    // useEffect(() => {
+    //     if (walletCtx.connected && walletCtx.account) {
+    //         ctz.action.init()
+    //     } else ctz.action.resetCitizens()
+    // }, [])
 
-    // when user disconnects
+
     useEffect(() => {
-        if (!walletCtx.connected) ctz.action.resetCitizens()
+        if (!walletCtx.connected) ctz.action.resetCitizens() 
+            else delayed()
     }, [walletCtx.connected])
+
+
+    const delayed = async ()=>{
+        await waits(1000)
+        ctz.action.init()
+    }    
 
     return (
         <div>

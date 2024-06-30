@@ -3,6 +3,7 @@ import { Button } from '../ui/button'
 import SpinnerSVG from '@/assets/svg/loading-01.svg'
 import MetamaskSVG from '@/assets/svg/metamask.svg'
 import { useWalletContext } from '@/providers/metamask/wallet'
+import { MetaMaskButton } from '@metamask/sdk-react-ui'
 
 export function ConnectWallet() {
     const walletCtx = useWalletContext()
@@ -10,8 +11,6 @@ export function ConnectWallet() {
     const connect = async () => {
         await walletCtx.connectToMetaMask()
     }
-    
-    
 
     return (
         <div>
@@ -37,4 +36,8 @@ export function ConnectWallet() {
             )}
         </div>
     )
+}
+
+export const ConnectWalletUI = () => {
+    return <MetaMaskButton theme={'dark'} color="orange"></MetaMaskButton>
 }

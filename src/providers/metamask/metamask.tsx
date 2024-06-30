@@ -1,5 +1,6 @@
-import { ReactNode } from 'react'
-import { MetaMaskProvider } from '@metamask/sdk-react'
+import { ReactNode } from 'react';
+import { MetaMaskProvider } from '@metamask/sdk-react';
+import { MetaMaskUIProvider } from "@metamask/sdk-react-ui";
 
 const MetamaskProvider = ({ children }: { children: ReactNode }) => {
     return (
@@ -19,4 +20,22 @@ const MetamaskProvider = ({ children }: { children: ReactNode }) => {
     )
 }
 
-export default MetamaskProvider
+const MetamaskUIProvider = ({ children }: { children: ReactNode }) => {
+    return (
+        <MetaMaskUIProvider
+            debug={true}
+            sdkOptions={{
+                dappMetadata: {
+                    name: 'Test Frontend 2024',
+                    url: window.location.href,
+                },
+                // infuraAPIKey: import.meta.env.VITE_INFURA_API_KEY,
+                // Other options.
+            }}
+        >
+            {children}
+        </MetaMaskUIProvider>
+    )
+}
+
+export { MetamaskProvider, MetamaskUIProvider }
