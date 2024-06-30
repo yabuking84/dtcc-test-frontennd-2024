@@ -1,11 +1,9 @@
 import {
     Pagination,
-    PaginationContent,
-    PaginationEllipsis,
-    PaginationItem,
+    PaginationContent, PaginationItem,
     PaginationLink,
     PaginationNext,
-    PaginationPrevious,
+    PaginationPrevious
 } from '@/views/components/ui/pagination'
 import { useMemo } from 'react'
 
@@ -41,7 +39,7 @@ export function ListPagination({
                                 onClick={() => handler(currentPage - 1)}
                             />
                         </PaginationItem>
-                        {new Array(totalPages).fill(null).map((e, i) => (
+                        {new Array(totalPages).fill(null).map((_, i) => (
                             <PaginationItem key={'pagination_' + i}>
                                 <PaginationLink
                                     className="cursor-pointer"

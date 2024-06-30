@@ -1,4 +1,4 @@
-import { Link, Outlet } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import { Navigation } from './nav'
 import { Footer } from './footer'
 import { Toaster } from '@/views/components/ui/toaster'

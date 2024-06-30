@@ -1,5 +1,4 @@
 import { ConnectWallet } from '@/views/components/metamask/connect-wallet'
-import { Link } from 'react-router-dom'
 
 export function Navigation() {
     return (

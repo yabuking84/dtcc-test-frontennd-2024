@@ -7,13 +7,11 @@ import { Skeleton } from '@/views/components/ui/skeleton'
 
 import {
     Table,
-    TableBody,
-    TableCaption,
-    TableCell,
+    TableBody, TableCell,
     TableFooter,
     TableHead,
     TableHeader,
-    TableRow,
+    TableRow
 } from '@/views/components/ui/table'
 import { AddCitizen } from './add'
 import { Note } from './note'
@@ -28,7 +26,6 @@ export function List() {
     const ctz = useCitizen()
 
     const [currentPage, setCurrentPage] = useState(1)
-    const [isLoaded, setIsLoaded] = useState(false)
 
     useEffect(() => {
         if (walletCtx.connected && walletCtx.account) {
@@ -75,7 +72,7 @@ export function List() {
                         </TableHeader>
                         {ctz.state.isLoading ? (
                             <TableBody>
-                                {new Array(pageSize).fill(true).map((e, i) => (
+                                {new Array(pageSize).fill(true).map((_, i) => (
                                     <TableRow key={i}>
                                         <TableCell colSpan={5}>
                                             <div className="flex items-center space-x-4">
