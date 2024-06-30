@@ -49,22 +49,15 @@ export const WalletContextProvider = ({ children }: Props) => {
     const contract = new web3.eth.Contract(abi, address)
 
     provider?.on('connect', (data: any) => {
-        console.log('accounts', data)
         setAccount(data?.[0] || '')
     })
 
     provider?.on('accountsChanged', (data: any) => {
-        console.log('accounts', data)
         setAccount(data?.[0] || '')
     })
 
-    provider?.on('disconnect', (data: any) => {
-        console.log('DISCONNECT', data)
+    provider?.on('disconnect', () => {
         setAccount('')
-    })
-
-    provider?.on('message', (data: any) => {
-        console.log('MESSAGE', data)
     })
 
     useEffect(() => {

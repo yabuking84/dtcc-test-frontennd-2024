@@ -69,7 +69,6 @@ export function AddCitizen({
         } catch (error) {
             if (error instanceof z.ZodError) {
                 const formatted: FlattenedCitizenFormErrors = error.flatten()
-                console.log(formatted)
                 setErrors({
                     name: formatted.fieldErrors.name?.[0] || '',
                     age: formatted.fieldErrors.age?.[0] || '',

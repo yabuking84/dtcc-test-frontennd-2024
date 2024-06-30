@@ -40,7 +40,6 @@ export const useCitizen = () => {
         setIsAdding(true)
         setAddingStatus('adding')
         try {
-            console.log('PAYLOAD:', payload)
             await wCtx.contract?.methods
                 ?.addCitizen(
                     payload.age,
@@ -64,7 +63,7 @@ export const useCitizen = () => {
                     throw new Error('Error')
                 })
         } catch (error) {
-            console.log(error)
+            console.error(error)
             toast({
                 title: 'Error',
                 description: 'Error adding citizen',
@@ -110,7 +109,6 @@ export const useCitizen = () => {
             toBlock: block.toBlock,
         })
 
-        console.log(events)
         if (events?.length) {
             /**
              * Had difficulty decoding city to string, 
@@ -151,10 +149,10 @@ export const useCitizen = () => {
                                         ctzns.push(buf)
                                 }
                             } catch (e) {
-                                // console.log(
-                                //     'Log does not match the event signature:',
-                                //     e,
-                                // )
+                                console.error(
+                                    'Log does not match the event signature:',
+                                    e,
+                                )
                             }
                         })
                     }
