@@ -27,14 +27,6 @@ export function List() {
     const ctz = useCitizen()
 
     const [currentPage, setCurrentPage] = useState(1)
-
-    // useEffect(() => {
-    //     if (walletCtx.connected && walletCtx.account) {
-    //         ctz.action.init()
-    //     } else ctz.action.resetCitizens()
-    // }, [])
-
-
     useEffect(() => {
         if (!walletCtx.connected) ctz.action.resetCitizens() 
             else delayed()
@@ -45,6 +37,10 @@ export function List() {
         await waits(1000)
         ctz.action.init()
     }    
+
+    walletCtx.provider?.on('chainChanged',()=>{
+        delayed()
+    })
 
     return (
         <div>

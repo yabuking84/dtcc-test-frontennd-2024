@@ -162,6 +162,9 @@ export const useCitizen = () => {
             }
 
             setCitizens(ctzns.reverse())
+        } else {
+            setCitizens([])
+
         }
     }
 
