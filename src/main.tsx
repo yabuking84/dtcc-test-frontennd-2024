@@ -4,15 +4,15 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 
 import '@/assets/styles/scss/global.scss'
-import MetamaskProvider from '@/providers/metamask/metamask.tsx'
+import { MetamaskUIProvider } from '@/providers/metamask/metamask.tsx'
 import { WalletContextProvider } from '@/providers/metamask/wallet.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-        <MetamaskProvider>
+        <MetamaskUIProvider>
             <WalletContextProvider>
                 <App />
             </WalletContextProvider>
-        </MetamaskProvider>
+        </MetamaskUIProvider>
     </React.StrictMode>,
 )

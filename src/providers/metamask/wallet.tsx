@@ -1,11 +1,14 @@
-import { createContext, useState, useContext, useEffect } from 'react'
-import { useSDK } from '@metamask/sdk-react'
-import type { MetaMaskSDK, SDKProvider } from '@metamask/sdk'
-import { RegisteredSubscription } from 'web3-eth'
-import Web3 from 'web3'
-import { abi, address } from '@/contracts/citizen'
-import type { Contract } from 'web3-eth-contract'
-import { EthereumRpcError } from 'eth-rpc-errors'
+import { createContext, useState, useContext } from 'react';
+// import { useSDK } from '@metamask/sdk-react'
+import {
+    useSDK,
+} from "@metamask/sdk-react-ui";
+import type { MetaMaskSDK, SDKProvider } from '@metamask/sdk';
+import { RegisteredSubscription } from 'web3-eth';
+import Web3 from 'web3';
+import { abi, address } from '@/contracts/citizen';
+import type { Contract } from 'web3-eth-contract';
+import { EthereumRpcError } from 'eth-rpc-errors';
 
 const contextState: {
     account: string
@@ -75,11 +78,11 @@ export const WalletContextProvider = ({ children }: Props) => {
         console.log('MESSAGE', data)
     })
 
-    useEffect(() => {
-        if (!account) {
-            connectToMetaMask()
-        }
-    }, [connected])
+    // useEffect(() => {
+    //     if (!account) {
+    //         connectToMetaMask()
+    //     }
+    // }, [connected])
 
     return (
         <WalletContext.Provider
