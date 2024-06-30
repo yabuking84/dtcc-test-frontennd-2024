@@ -1,5 +1,5 @@
 import { useCitizen } from '@/hooks/useCitizen'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Button } from '../ui/button'
 import SpinnerSVG from '@/assets/svg/loading-01.svg'
 import EmptySVG from '@/assets/svg/empty-box-01.svg'
@@ -18,7 +18,7 @@ import {
 import { AddCitizen } from './add'
 import { Note } from './note'
 import { useWalletContext } from '@/providers/metamask/wallet'
-import { ListPagination } from './pagination'
+import { ListPaginationMemo } from './pagination'
 import { FadeIn } from '@/views/transitions/fadein'
 import { waits } from '@/lib/utils'
 
@@ -29,6 +29,9 @@ export function List() {
     const ctz = useCitizen()
 
     const [currentPage, setCurrentPage] = useState(1)
+    const newCurrentPage = useCallback((e:number)=>{
+        setCurrentPage(e)
+    },[])
     useEffect(() => {
         if (!walletCtx.connected) ctz.action.resetCitizens()
         else delayed()
@@ -124,11 +127,9 @@ export function List() {
                                 <TableFooter className="w-full">
                                     <TableRow className='bg-white'>
                                         <TableCell colSpan={5}>
-                                            <ListPagination
+                                            <ListPaginationMemo
                                                 pageSize={pageSize}
-                                                changePage={(e) =>
-                                                    setCurrentPage(e)
-                                                }
+                                                changePage={newCurrentPage}
                                                 currentPage={currentPage}
                                                 totalItems={
                                                     ctz.state.citizens.length
