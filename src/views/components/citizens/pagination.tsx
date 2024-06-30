@@ -5,9 +5,9 @@ import {
     PaginationNext,
     PaginationPrevious
 } from '@/views/components/ui/pagination'
-import { useMemo } from 'react'
+import { memo, useMemo } from 'react'
 
-export function ListPagination({
+ export function ListPagination({
     pageSize,
     currentPage,
     totalItems,
@@ -65,3 +65,6 @@ export function ListPagination({
         </>
     )
 }
+
+
+export const ListPaginationMemo = memo(ListPagination)
