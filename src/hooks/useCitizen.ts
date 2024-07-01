@@ -6,13 +6,10 @@ import {
     CitizenFormSchema,
     CitizenFormType,
     CitizenType,
-} from '@/schems/citizen'
+} from '@/schemas/citizen'
 import { ethers } from 'ethers'
+import { type Block, getBlock } from '@/lib/web3'
 
-interface Block {
-    fromBlock: bigint
-    toBlock: bigint
-}
 
 export const useCitizen = () => {
     const wCtx = useWalletContext()
@@ -96,7 +93,7 @@ export const useCitizen = () => {
         init: async function () {
             setIsLoading(true)
             try {
-                const block = await getter.getBlock()
+                const block = await getBlock(wCtx)
                 await action.initCitizens(block)
                 await waits(500) // so that it wont be too twitchy
             } catch (error: any) {
@@ -200,13 +197,7 @@ export const useCitizen = () => {
             }
         },
 
-        getBlock: async function (): Promise<Block> {
-            const block = (await wCtx.web3?.eth.getBlockNumber()) || 1000001n
-            return {
-                fromBlock: block - 1000000n,
-                toBlock: block,
-            }
-        },
+     
     }
 
     return {
