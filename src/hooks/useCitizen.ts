@@ -76,7 +76,7 @@ export const useCitizen = () => {
         }
     }
 
-    const getNote = async (id: string): Promise<string> => {
+    const getNoteById = async (id: string): Promise<string> => {
         try {
             setIsGettingNote(true)
             const note = await wCtx.contract?.methods
@@ -171,7 +171,7 @@ export const useCitizen = () => {
         try {
             const block = await getBlock()
             await initCitizens(block)
-            await waits(500)
+            await waits(500) // so that it wont be too twitchy
         } catch (error: any) {
             console.error(error)
             if (
@@ -208,9 +208,11 @@ export const useCitizen = () => {
         action: {
             init,
             addCitizen,
-            getNote,
             resetCitizens,
             paginateCitizens,
+        },
+        getter:{
+            getNoteById,
         },
         state: {
             citizens,

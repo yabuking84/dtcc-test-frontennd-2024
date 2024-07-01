@@ -13,10 +13,10 @@ export function Note({
     const [note, setNote] = useState('')
     const [isLoading, setIsLoading] = useState(false)
 
-    const getNote = async () => {
+    const initNote = async () => {
         setIsLoading(true)
         try {
-            const note = await ctz.action.getNote(id + '')
+            const note = await ctz.getter.getNoteById(id + '')
             if (note) setNote(note)
         } finally {
             setIsLoading(false)
@@ -24,7 +24,7 @@ export function Note({
     }
 
     useEffect(() => {
-        getNote()
+        initNote()
     }, [])
 
     return (
