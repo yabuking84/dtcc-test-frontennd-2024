@@ -12,6 +12,9 @@ const chunkVendors = [
     { compare: 'ethers', filename: 'ethers' },
     { compare: 'web3', filename: 'web3' },
     { compare: 'framer-motion', filename: 'framer-motion' },
+    { compare: '@metamask', filename: 'at-metamask' },
+    { compare: '@radix-ui', filename: 'at-radix-ui' },
+    { compare: 'lucide-react', filename: 'lucide-react' },
 ]
 
 const manualChunks = (id: string) => {
