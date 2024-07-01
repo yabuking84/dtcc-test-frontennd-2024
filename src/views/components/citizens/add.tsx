@@ -9,7 +9,7 @@ import {
 } from '@/views/components/ui/dialog'
 import { Input } from '@/views/components/ui/input'
 import { Label } from '@/views/components/ui/label'
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import SpinnerSVG from '@/assets/svg/loading-01.svg'
 import PlusSVG from '@/assets/svg/plus-circle.svg'
 import type { useCitizen } from '@/hooks/useCitizen'
@@ -35,9 +35,11 @@ const DefErrors = {
 export function AddCitizen({
     ctz,
     walletCtx,
+    onSuccess
 }: {
     ctz: ReturnType<typeof useCitizen>
     walletCtx: ReturnType<typeof useWalletContext>
+    onSuccess?:()=>void
 }) {
     const [open, setOpen] = useState(false)
 
@@ -66,7 +68,7 @@ export function AddCitizen({
         try {
             await ctz.action.addCitizen(formData)
             setOpen(false)
-            await ctz.action.init()
+            onSuccess?.()
         } catch (error) {
             if (error instanceof z.ZodError) {
                 const formatted: FlattenedCitizenFormErrors = error.flatten()
@@ -179,3 +181,6 @@ export function AddCitizen({
         </>
     )
 }
+
+
+export const AddCitizenMemo = memo(AddCitizen)

@@ -15,7 +15,7 @@ import {
     TableHeader,
     TableRow,
 } from '@/views/components/ui/table'
-import { AddCitizen } from './add'
+import { AddCitizenMemo } from './add'
 import { NoteMemo } from './note'
 import { useWalletContext } from '@/providers/metamask/wallet'
 import { ListPaginationMemo } from './pagination'
@@ -34,29 +34,36 @@ export function List() {
     }, [])
     useEffect(() => {
         if (!walletCtx.connected) ctz.action.resetCitizens()
-        else delayed()
+        else delayedInit()
     }, [walletCtx.connected])
 
-    const delayed = async () => {
+    const delayedInit = useCallback(async () => {
         await waits(1000)
         ctz.action.init()
-    }
+        setCurrentPage(1)
+    },[])
 
     walletCtx.provider?.on('chainChanged', () => {
-        delayed()
+        delayedInit()
     })
 
     return (
         <div>
             <div className="mb-8 flex justify-between gap-8 lg:justify-end">
-                <AddCitizen ctz={ctz} walletCtx={walletCtx} />
+                <AddCitizenMemo ctz={ctz} walletCtx={walletCtx} onSuccess={delayedInit} />
                 {ctz.state.isLoading ? (
                     <Button title="Refresh" disabled>
                         Refresh
                         <SpinnerSVG className="ms-2 animate-spin text-xl" />
                     </Button>
                 ) : (
-                    <Button title="Refresh" onClick={() => ctz.action.init()}>
+                    <Button
+                        title="Refresh"
+                        onClick={() => {
+                            ctz.action.init()
+                            setCurrentPage(1)
+                        }}
+                    >
                         Refresh
                         <RefreshSVG className="ms-2 text-xl" />
                     </Button>
@@ -74,7 +81,7 @@ export function List() {
                                 <Skeleton className="h-6 w-12" />
                                 <Skeleton className="h-6 w-1/3" />
                                 <Skeleton className="h-6 w-2/3" />
-                                <Skeleton className="h-12 w-12 min-h-12 min-w-12 rounded-full" />
+                                <Skeleton className="h-12 min-h-12 w-12 min-w-12 rounded-full" />
                             </div>
                         ))
                     ) : (
