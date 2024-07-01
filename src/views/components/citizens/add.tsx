@@ -14,7 +14,7 @@ import SpinnerSVG from '@/assets/svg/loading-01.svg'
 import PlusSVG from '@/assets/svg/plus-circle.svg'
 import type { useCitizen } from '@/hooks/useCitizen'
 import { z } from 'zod'
-import { FlattenedCitizenFormErrors } from '@/schems/citizen'
+import { FlattenedCitizenFormErrors } from '@/schemas/citizen'
 import { Textarea } from '@/views/components/ui/textarea'
 import { useWalletContext } from '@/providers/metamask/wallet'
 
