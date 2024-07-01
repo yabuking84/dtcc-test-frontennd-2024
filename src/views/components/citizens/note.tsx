@@ -32,7 +32,7 @@ export function Note({
 
 
             {note ? (
-                <p className="text-xl  h-[36px]">{note}</p>
+                <p className="text-xl  min-h-[36px]">{note}</p>
             ) : isLoading ? (
                 <div className="flex items-center h-[36px]">
                     <SpinnerSVG className="animate-spin text-2xl my-1" />

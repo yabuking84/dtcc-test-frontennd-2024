@@ -31,7 +31,7 @@ import { memo, useMemo } from 'react'
     return (
         <>
             {totalPages > 1 ? (
-                <Pagination className="w-full">
+                <Pagination className="w-full select-none">
                     <PaginationContent>
                         <PaginationItem>
                             <PaginationPrevious
