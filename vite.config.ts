@@ -8,8 +8,33 @@ import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 const projPath = path.resolve(__dirname)
 
+const chunkVendors = [
+    { compare: 'ethers', filename: 'ethers' },
+    { compare: 'web3', filename: 'web3' },
+    { compare: 'framer-motion', filename: 'framer-motion' },
+]
+
+const manualChunks = (id: string) => {
+    const fndIdx = chunkVendors.findIndex((el) =>
+        id.includes('node_modules/' + el.compare),
+    )
+    if (fndIdx >= 0) {
+        return 'vendors_' + chunkVendors[fndIdx].filename
+    } else if (id.includes('node_modules')) {
+        return 'vendors'
+    }
+}
+
 // https://vitejs.dev/config/
 export default defineConfig({
+    build: {
+        // chunks the menu for async download on components
+        rollupOptions: {
+            output: {
+                manualChunks,
+            },
+        },
+    },
     plugins: [
         react(),
         million.vite({
