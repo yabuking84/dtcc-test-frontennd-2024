@@ -95,7 +95,7 @@ export const useCitizen = () => {
         }
     }
 
-    const initBlock = async (): Promise<Block> => {
+    const getBlock = async (): Promise<Block> => {
         const block = (await wCtx.web3?.eth.getBlockNumber()) || 1000001n
         return {
             fromBlock: block - 1000000n,
@@ -169,7 +169,7 @@ export const useCitizen = () => {
     const init = async () => {
         setIsLoading(true)
         try {
-            const block = await initBlock()
+            const block = await getBlock()
             await initCitizens(block)
             await waits(500)
         } catch (error: any) {
