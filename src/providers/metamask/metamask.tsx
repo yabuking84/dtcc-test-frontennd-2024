@@ -10,7 +10,7 @@ const MetamaskProvider = ({ children }: { children: ReactNode }) => {
                     name: 'Test Frontend 2024',
                     url: window.location.href,
                 },
-                checkInstallationImmediately: false,
+                preferDesktop: true
                 // infuraAPIKey: import.meta.env.VITE_INFURA_API_KEY,
                 // Other options.
             }}
@@ -28,7 +28,7 @@ const MetamaskUIProvider = ({ children }: { children: ReactNode }) => {
                     name: 'Test Frontend 2024',
                     url: window.location.href,
                 },
-                checkInstallationImmediately: false,
+                preferDesktop: true
                 // infuraAPIKey: import.meta.env.VITE_INFURA_API_KEY,
                 // Other options.
             }}

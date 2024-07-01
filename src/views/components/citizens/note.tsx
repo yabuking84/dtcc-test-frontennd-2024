@@ -1,7 +1,7 @@
 import type { useCitizen } from '@/hooks/useCitizen'
 
 import SpinnerSVG from '@/assets/svg/loading-01.svg'
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 
 export function Note({
     ctz,
@@ -47,3 +47,6 @@ export function Note({
         </div>
     )
 }
+
+
+export const NoteMemo = memo(Note)

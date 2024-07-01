@@ -16,7 +16,7 @@ import {
     TableRow,
 } from '@/views/components/ui/table'
 import { AddCitizen } from './add'
-import { Note } from './note'
+import { NoteMemo } from './note'
 import { useWalletContext } from '@/providers/metamask/wallet'
 import { ListPaginationMemo } from './pagination'
 import { FadeIn } from '@/views/transitions/fadein'
@@ -119,7 +119,7 @@ export function List() {
                                                 <TableCell>{e.age}</TableCell>
                                                 <TableCell>{e.city}</TableCell>
                                                 <TableCell>
-                                                    <Note ctz={ctz} id={e.id} />
+                                                    <NoteMemo ctz={ctz} id={e.id} />
                                                 </TableCell>
                                             </TableRow>
                                         ))}
